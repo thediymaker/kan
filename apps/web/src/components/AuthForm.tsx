@@ -5,7 +5,7 @@ import { t } from "@lingui/core/macro";
 import { Trans } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "next-runtime-env";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   FaApple,
@@ -162,7 +162,6 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
   const [loginError, setLoginError] = useState<string | null>(null);
   const { showPopup } = usePopup();
   const oidcProviderName = "OIDC";
-  const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const redirect = useSearchParams().get("next");
   const callbackURL = redirect ?? "/boards";
@@ -184,8 +183,10 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
     handleSubmit,
     formState: { errors },
     watch,
+    setFocus,
   } = useForm<FormValues>({
     resolver: zodResolver(EmailSchema),
+    mode: "onChange",
   });
 
   const { data: socialProviders } = useQuery({
@@ -326,10 +327,10 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
     } else if (errors.password) {
       needsPassword = true;
     }
-    if (needsPassword && passwordRef.current) {
-      passwordRef.current.focus();
+    if (needsPassword) {
+      setFocus("password");
     }
-  }, [isSignUp, password, loginError, errors.password, isCredentialsEnabled]);
+  }, [isSignUp, password, loginError, errors.password, isCredentialsEnabled, setFocus]);
 
   return (
     <div className="space-y-6">
@@ -392,20 +393,20 @@ export function Auth({ setIsMagicLinkSent, isSignUp }: AuthProps) {
               </p>
             )}
           </div>
-          {isCredentialsEnabled && (
-            <div>
-              <Input
-                type="password"
-                {...register("password", { required: true })}
-                placeholder={t`Enter your password`}
-              />
-              {errors.password && (
-                <p className="mt-2 text-xs text-red-400">
-                  {errors.password.message ?? t`Please enter a valid password`}
-                </p>
-              )}
-            </div>
-          )}
+          <div className={isCredentialsEnabled ? "" : "hidden"}>
+            <Input
+              type="password"
+              {...register("password", {
+                required: isCredentialsEnabled ? t`Password is required` : false
+              })}
+              placeholder={t`Enter your password`}
+            />
+            {errors.password && isCredentialsEnabled && (
+              <p className="mt-2 text-xs text-red-400">
+                {errors.password.message ?? t`Please enter a valid password`}
+              </p>
+            )}
+          </div>
           {loginError && (
             <p className="mt-2 text-xs text-red-400">{loginError}</p>
           )}
