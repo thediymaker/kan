@@ -24,6 +24,7 @@
 - 👁️ **Board Visibility**: Control who can view and edit your boards
 - 🤝 **Workspace Members**: Invite members and collaborate with your team
 - 🚀 **Trello Imports**: Easily import your Trello boards
+- 📋 **JSON Import & Export**: Import cards from JSON format or export your boards to JSON, with full support for lists, cards, labels, and checklists
 - 🔍 **Labels & Filters**: Organise and find cards quickly
 - 💬 **Comments**: Discuss and collaborate with your team
 - 📝 **Activity Log**: Track all card changes with detailed activity history

@@ -4,6 +4,7 @@ import { checklistRouter } from "./routers/checklist";
 import { feedbackRouter } from "./routers/feedback";
 import { importRouter } from "./routers/import";
 import { integrationRouter } from "./routers/integration";
+import { jsonImportRouter } from "./routers/json-import";
 import { labelRouter } from "./routers/label";
 import { listRouter } from "./routers/list";
 import { memberRouter } from "./routers/member";
@@ -20,6 +21,7 @@ export const appRouter = createTRPCRouter({
   list: listRouter,
   member: memberRouter,
   import: importRouter,
+  jsonImport: jsonImportRouter,
   user: userRouter,
   workspace: workspaceRouter,
   integration: integrationRouter,

@@ -33,6 +33,7 @@ import Card from "./components/Card";
 import { DeleteBoardConfirmation } from "./components/DeleteBoardConfirmation";
 import { DeleteListConfirmation } from "./components/DeleteListConfirmation";
 import Filters from "./components/Filters";
+import { ImportCardsFromJsonModal } from "./components/ImportCardsFromJsonModal";
 import List from "./components/List";
 import { NewCardForm } from "./components/NewCardForm";
 import { NewListForm } from "./components/NewListForm";
@@ -350,6 +351,13 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
             sourceBoardPublicId={boardId ?? ""}
             sourceBoardName={boardData?.name ?? ""}
           />
+        </Modal>
+
+        <Modal
+          modalSize="lg"
+          isVisible={isOpen && modalContentType === "IMPORT_JSON"}
+        >
+          <ImportCardsFromJsonModal boardPublicId={boardId ?? ""} />
         </Modal>
       </>
     );

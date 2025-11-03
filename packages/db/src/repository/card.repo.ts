@@ -289,7 +289,7 @@ export const bulkCreate = async (
     const inserted = await tx
       .insert(cards)
       .values(allValuesToInsert)
-      .returning({ id: cards.id });
+      .returning({ id: cards.id, publicId: cards.publicId });
 
     // Post-insert: compact per list if duplicates exist; then verify
     const countExpr = sql<number>`COUNT(*)`.mapWith(Number);
