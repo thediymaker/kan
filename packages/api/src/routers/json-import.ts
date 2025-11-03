@@ -339,8 +339,12 @@ export const jsonImportRouter = createTRPCRouter({
             })),
           );
 
-          newLabels.forEach((label) => {
-            labelMap.set(label.name.toLowerCase(), label.id);
+          // bulkCreate returns only { id }, so align by input order to map name -> id
+          labelsToCreate.forEach((name, i) => {
+            const created = newLabels[i];
+            if (created) {
+              labelMap.set(name.toLowerCase(), created.id);
+            }
           });
         }
 
@@ -504,7 +508,6 @@ export const jsonImportRouter = createTRPCRouter({
                 name: checklistData.name.substring(0, 255),
                 cardId: createdCard.id,
                 createdBy: userId,
-                index: j,
               });
 
               if (!checklist?.id) {
@@ -533,10 +536,8 @@ export const jsonImportRouter = createTRPCRouter({
                 console.log(`Creating item ${k}: "${itemData.title}"`);
                 const createdItem = await checklistRepo.createItem(ctx.db, {
                   title: itemData.title.substring(0, 500),
-                  completed: itemData.completed ?? false,
                   checklistId: checklist.id,
                   createdBy: userId,
-                  index: k,
                 });
 
                 if (!createdItem) {
