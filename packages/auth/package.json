@@ -24,12 +24,8 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "devDependencies": {
-    "@kan/db": "workspace:*",
-    "@kan/email": "workspace:*",
     "@kan/eslint-config": "workspace:*",
     "@kan/prettier-config": "workspace:*",
-    "@kan/shared": "workspace:*",
-    "@kan/stripe": "workspace:*",
     "@kan/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
@@ -38,6 +34,10 @@
   "prettier": "@kan/prettier-config",
   "dependencies": {
     "@better-auth/stripe": "^1.3.7",
+    "@kan/db": "workspace:*",
+    "@kan/email": "workspace:*",
+    "@kan/shared": "workspace:*",
+    "@kan/stripe": "workspace:*",
     "better-auth": "^1.3.7"
   }
 }
