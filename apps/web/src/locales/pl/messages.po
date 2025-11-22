@@ -36,7 +36,7 @@ msgstr "{0}"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
 #: src/views/boards/index.tsx:22
-#: src/views/card/index.tsx:216
+#: src/views/card/index.tsx:217
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -46,7 +46,7 @@ msgid "{0} labels"
 msgstr "{0} etykiety"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:387
+#: src/views/board/index.tsx:395
 msgid "{0} not found"
 msgstr "{0} nie znaleziono"
 
@@ -84,7 +84,7 @@ msgstr "Konto"
 msgid "Account deleted"
 msgstr "Konto zostało usunięte"
 
-#: src/views/card/index.tsx:291
+#: src/views/card/index.tsx:296
 #: src/views/public/board/CardModal.tsx:143
 msgid "Activity"
 msgstr "Aktywność"
@@ -96,6 +96,10 @@ msgstr "Dziennik aktywności"
 #: src/views/home/components/Features.tsx:110
 msgid "Activity logs"
 msgstr "Dzienniki aktywności"
+
+#: src/views/card/components/Attachments.tsx:125
+msgid "Add"
+msgstr ""
 
 #: src/views/board/components/List.tsx:110
 msgid "Add a card"
@@ -275,6 +279,10 @@ msgstr "przypisano <0>{0}</0> do karty"
 msgid "Assignees"
 msgstr "Osoby przypisane"
 
+#: src/views/card/components/Attachments.tsx:117
+msgid "Attachments"
+msgstr ""
+
 #: src/views/boards/components/TemplateBoards.tsx:47
 msgid "Awaiting Customer"
 msgstr "Oczekuje na klienta"
@@ -309,8 +317,8 @@ msgstr "Portal rozliczeniowy"
 msgid "Blog Post"
 msgstr "Post na blogu"
 
-#: src/views/board/index.tsx:361
-#: src/views/card/index.tsx:216
+#: src/views/board/index.tsx:369
+#: src/views/card/index.tsx:217
 #: src/views/public/board/index.tsx:100
 msgid "Board"
 msgstr "Tablica"
@@ -392,11 +400,11 @@ msgstr "Zgłoszenie błędu"
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: src/views/card/index.tsx:216
+#: src/views/card/index.tsx:217
 msgid "Card"
 msgstr "Karta"
 
-#: src/views/card/index.tsx:262
+#: src/views/card/index.tsx:263
 msgid "Card not found"
 msgstr "Nie można było znaleźć karty"
 
@@ -524,12 +532,12 @@ msgstr "Skontaktuj się z nami"
 msgid "Content Creation"
 msgstr "Tworzenie treści"
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:421
 msgid "Continue with "
 msgstr "Kontynuuj z "
 
 #. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
-#: src/components/AuthForm.tsx:351
+#: src/components/AuthForm.tsx:352
 msgid "Continue with {0}"
 msgstr "Kontynuuj z {0}"
 
@@ -590,7 +598,7 @@ msgstr "Utwórz nowy klucz"
 msgid "Create new label"
 msgstr "Utwórz nową etykietę"
 
-#: src/views/board/index.tsx:475
+#: src/views/board/index.tsx:483
 msgid "Create new list"
 msgstr "Utwórz nową listę"
 
@@ -660,6 +668,7 @@ msgstr "Dezaktywuj link zaproszenia"
 #: src/components/DeleteLabelConfirmation.tsx:51
 #: src/components/LabelForm.tsx:228
 #: src/views/board/components/DeleteBoardConfirmation.tsx:47
+#: src/views/card/components/Attachments.tsx:182
 #: src/views/card/components/DeleteCardConfirmation.tsx:92
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:66
 #: src/views/card/components/DeleteCommentConfirmation.tsx:82
@@ -672,7 +681,7 @@ msgstr "Usuń"
 msgid "Delete account"
 msgstr "Usuń konto"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:89
 msgid "Delete board"
 msgstr "Usuń tablicę"
 
@@ -684,11 +693,15 @@ msgstr "Usuń kartę"
 msgid "Delete comment"
 msgstr "Usuń komentarz"
 
+#: src/views/card/components/Attachments.tsx:48
+msgid "Delete failed"
+msgstr ""
+
 #: src/views/board/components/List.tsx:117
 msgid "Delete list"
 msgstr "Usuń listę"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:89
 msgid "Delete template"
 msgstr "Usuń szablon"
 
@@ -774,7 +787,7 @@ msgstr "Nie masz konta? <0><1>Zarejestruj się</1></0>"
 msgid "Done"
 msgstr "Gotowe"
 
-#: src/views/board/components/BoardDropdown.tsx:41
+#: src/views/board/components/BoardDropdown.tsx:82
 #: src/views/board/components/UpdateBoardSlugForm.tsx:115
 msgid "Edit board URL"
 msgstr "Edytuj URL tablicy"
@@ -795,7 +808,7 @@ msgstr "Edytuj URL przestrzeni roboczej"
 msgid "Editing"
 msgstr "Edycja"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:422
 msgid "email"
 msgstr "email"
 
@@ -815,11 +828,11 @@ msgstr "Wprowadź swoje obecne hasło"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Wprowadź swoje obecne hasło i wybierz nowe, bezpieczne hasło."
 
-#: src/components/AuthForm.tsx:387
+#: src/components/AuthForm.tsx:388
 msgid "Enter your email address"
 msgstr "Wprowadź swój adres e-mail"
 
-#: src/components/AuthForm.tsx:375
+#: src/components/AuthForm.tsx:376
 msgid "Enter your name"
 msgstr "Wprowadź swoje imię"
 
@@ -827,7 +840,7 @@ msgstr "Wprowadź swoje imię"
 msgid "Enter your new password"
 msgstr "Wprowadź swoje nowe hasło"
 
-#: src/components/AuthForm.tsx:400
+#: src/components/AuthForm.tsx:402
 msgid "Enter your password"
 msgstr "Wprowadź swoje hasło"
 
@@ -918,6 +931,10 @@ msgstr "Wszystko, czego potrzebujesz, za darmo na zawsze. Nielimitowane tablice,
 msgid "Execution"
 msgstr "Wykonanie"
 
+#: src/views/board/components/BoardDropdown.tsx:68
+msgid "Export to JSON"
+msgstr ""
+
 #: src/views/invite/index.tsx:41
 msgid "Failed to accept invitation. Please try again later, or contact customer support."
 msgstr "Nie udało się zaakceptować zaproszenia. Spróbuj ponownie później lub skontaktuj się z działem obsługi klienta."
@@ -931,10 +948,23 @@ msgstr "Nie udało się skopiować linku zaproszenia"
 msgid "Failed to create board"
 msgstr "Nie udało się utworzyć tablicy"
 
+#: src/views/card/components/Attachments.tsx:49
+msgid "Failed to delete attachment"
+msgstr ""
+
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
-#: src/components/AuthForm.tsx:291
+#: src/components/AuthForm.tsx:292
 msgid "Failed to login with {0}. Please try again."
 msgstr "Nie udało się zalogować za pomocą {0}. Spróbuj ponownie."
+
+#: src/views/card/components/Attachments.tsx:62
+msgid "Failed to update cover image"
+msgstr ""
+
+#: src/views/card/components/Attachments.tsx:34
+#: src/views/card/components/Attachments.tsx:104
+msgid "Failed to upload attachment"
+msgstr ""
 
 #: src/views/home/components/Header.tsx:41
 msgid "FAQ"
@@ -992,6 +1022,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Dla długoterminowej trwałości uznajemy, że wszystkie dobre projekty open source potrzebują źródła dochodu. Nasze pochodzi z płatnej oferty w chmurze dla przestrzeni roboczych z wieloma użytkownikami oraz dla niestandardowych nazw przestrzeni roboczych. Nie ma obowiązku korzystania z niej, a oprogramowanie można hostować samodzielnie na własnej infrastrukturze bezpłatnie."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Darmowy"
@@ -1033,7 +1065,7 @@ msgstr "Rozpocznij"
 msgid "Get started by creating a new {0}"
 msgstr "Rozpocznij, tworząc nowy {0}"
 
-#: src/views/board/index.tsx:467
+#: src/views/board/index.tsx:475
 msgid "Get started by creating a new list"
 msgstr "Rozpocznij, tworząc nową listę"
 
@@ -1120,6 +1152,15 @@ msgstr "Pomysły na ulepszenie tej strony..."
 msgid "Import"
 msgstr "Importuj"
 
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:206
+msgid "Import Cards"
+msgstr ""
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:100
+msgid "Import Cards from JSON"
+msgstr ""
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:42
 #: src/views/boards/components/ImportBoardsForm.tsx:191
 msgid "Import complete"
 msgstr "Import zakończony"
@@ -1127,6 +1168,10 @@ msgstr "Import zakończony"
 #: src/views/boards/components/ImportBoardsForm.tsx:204
 msgid "Import failed"
 msgstr "Import nie powiódł się"
+
+#: src/views/board/components/BoardDropdown.tsx:61
+msgid "Import from JSON"
+msgstr ""
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:80
 msgid "Import from Trello"
@@ -1184,6 +1229,11 @@ msgstr "Nieprawidłowy adres e-mail"
 msgid "Invalid invitation"
 msgstr "Nieprawidłowe zaproszenie"
 
+#. placeholder {0}: error instanceof Error ? error.message : "Unknown error"
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:72
+msgid "Invalid JSON format: {0}"
+msgstr ""
+
 #: src/views/members/index.tsx:221
 msgid "Invite"
 msgstr "Zaproś"
@@ -1222,6 +1272,14 @@ msgstr "Dołącz do środowiska pracy"
 msgid "Join workspace | kan.bn"
 msgstr "Dołącz do środowiska pracy | kan.bn"
 
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:163
+msgid "JSON Data"
+msgstr ""
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:120
+msgid "JSON Template"
+msgstr ""
+
 #: src/views/boards/components/TemplateBoards.tsx:70
 msgid "Junior"
 msgstr "Junior"
@@ -1249,7 +1307,7 @@ msgstr "Pamiętaj, że ta akcja jest nieodwracalna."
 
 #: src/views/board/components/Filters.tsx:101
 #: src/views/board/components/NewCardForm.tsx:408
-#: src/views/card/index.tsx:117
+#: src/views/card/index.tsx:118
 msgid "Labels"
 msgstr "Etykiety"
 
@@ -1303,7 +1361,7 @@ msgstr "Jasny"
 msgid "Link copied"
 msgstr "Link skopiowany"
 
-#: src/views/card/index.tsx:109
+#: src/views/card/index.tsx:110
 msgid "List"
 msgstr "Lista"
 
@@ -1331,11 +1389,15 @@ msgstr "Uwielbiane przez zespoły na całym świecie"
 msgid "Low Priority"
 msgstr "Niski priorytet"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:422
 msgid "magic link"
 msgstr "magiczny link"
 
-#: src/views/board/components/BoardDropdown.tsx:34
+#: src/views/card/components/Attachments.tsx:169
+msgid "Make cover"
+msgstr ""
+
+#: src/views/board/components/BoardDropdown.tsx:75
 msgid "Make template"
 msgstr "Utwórz szablon"
 
@@ -1355,7 +1417,7 @@ msgstr "Średni priorytet"
 #: src/components/SideNavigation.tsx:101
 #: src/views/board/components/Filters.tsx:93
 #: src/views/board/components/NewCardForm.tsx:366
-#: src/views/card/index.tsx:126
+#: src/views/card/index.tsx:127
 #: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Członkowie"
@@ -1425,7 +1487,7 @@ msgid "New label"
 msgstr "Nowa etykieta"
 
 #: src/views/board/components/NewListForm.tsx:112
-#: src/views/board/index.tsx:439
+#: src/views/board/index.tsx:447
 msgid "New list"
 msgstr "Nowa lista"
 
@@ -1470,7 +1532,7 @@ msgstr "Nie znaleziono tablic"
 msgid "No credit card required"
 msgstr "Nie wymagana karta kredytowa"
 
-#: src/views/board/index.tsx:464
+#: src/views/board/index.tsx:472
 msgid "No lists"
 msgstr "Brak list"
 
@@ -1494,6 +1556,10 @@ msgstr "Po usunięciu konta nie będzie możliwości jego przywrócenia. Tej ope
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "Po usunięciu przestrzeni roboczej nie będzie możliwości jej przywrócenia. Tej operacji nie można cofnąć."
 
+#: src/views/card/components/Attachments.tsx:151
+msgid "Open"
+msgstr ""
+
 #: src/views/pricing/components/FeatureComparisonTable.tsx:150
 msgid "Open source"
 msgstr "Otwartoźródłowe"
@@ -1502,7 +1568,7 @@ msgstr "Otwartoźródłowe"
 msgid "Open Source Friends"
 msgstr "Przyjaciele Open Source"
 
-#: src/components/AuthForm.tsx:365
+#: src/components/AuthForm.tsx:366
 msgid "or"
 msgstr "lub"
 
@@ -1532,11 +1598,15 @@ msgstr "Niepełny etat"
 msgid "Password Changed"
 msgstr "Hasło zostało zmienione"
 
-#: src/components/AuthForm.tsx:258
+#: src/components/AuthForm.tsx:400
+msgid "Password is required"
+msgstr ""
+
+#: src/components/AuthForm.tsx:259
 msgid "Password is required to login."
 msgstr "Hasło jest wymagane do zalogowania się."
 
-#: src/components/AuthForm.tsx:257
+#: src/components/AuthForm.tsx:258
 msgid "Password is required to sign up."
 msgstr "Hasło jest wymagane do rejestracji."
 
@@ -1547,6 +1617,14 @@ msgstr "Hasło musi mieć co najmniej 8 znaków"
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:27
 msgid "Passwords do not match"
 msgstr "Hasła nie pasują do siebie"
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:150
+msgid "Paste your JSON data below. The JSON should include a list name and an array of cards with optional labels and checklists."
+msgstr ""
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:172
+msgid "Paste your JSON here..."
+msgstr ""
 
 #: src/views/members/index.tsx:134
 msgid "Paused"
@@ -1584,17 +1662,22 @@ msgstr "Platforma"
 msgid "Please confirm your new password"
 msgstr "Proszę potwierdzić nowe hasło"
 
-#: src/components/AuthForm.tsx:391
+#: src/components/AuthForm.tsx:392
 msgid "Please enter a valid email address"
 msgstr "Proszę wprowadzić prawidłowy adres e-mail"
 
-#: src/components/AuthForm.tsx:379
+#: src/components/AuthForm.tsx:380
 msgid "Please enter a valid name"
 msgstr "Proszę wprowadzić poprawne imię"
 
-#: src/components/AuthForm.tsx:404
+#: src/components/AuthForm.tsx:406
 msgid "Please enter a valid password"
 msgstr "Proszę wprowadzić poprawne hasło"
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:59
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:81
+msgid "Please enter JSON data"
+msgstr ""
 
 #: src/views/settings/components/Avatar.tsx:92
 msgid "Please select a file to upload."
@@ -1609,8 +1692,8 @@ msgstr "Proszę wybrać plik do przesłania."
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:72
 #: src/views/board/components/VisibilityButton.tsx:53
-#: src/views/board/index.tsx:149
-#: src/views/board/index.tsx:205
+#: src/views/board/index.tsx:150
+#: src/views/board/index.tsx:206
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/ChecklistItemRow.tsx:60
 #: src/views/card/components/ChecklistItemRow.tsx:88
@@ -1625,7 +1708,7 @@ msgstr "Proszę wybrać plik do przesłania."
 #: src/views/card/components/NewChecklistForm.tsx:70
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewCommentForm.tsx:31
-#: src/views/card/index.tsx:175
+#: src/views/card/index.tsx:176
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:241
@@ -1720,6 +1803,10 @@ msgstr "Zdalne"
 #: src/views/members/components/DeleteMemberConfirmation.tsx:58
 msgid "Remove"
 msgstr "Usuń"
+
+#: src/views/card/components/Attachments.tsx:168
+msgid "Remove cover"
+msgstr ""
 
 #: src/views/members/index.tsx:148
 msgid "Remove member"
@@ -1891,7 +1978,7 @@ msgstr "Rejestracja wyłączona"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "Rejestracja jest obecnie wyłączona. Spróbuj ponownie później."
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:421
 msgid "Sign up with "
 msgstr "Zarejestruj się za pomocą "
 
@@ -1925,10 +2012,16 @@ msgstr "Rozpocznij 14-dniowy bezpłatny okres próbny"
 msgid "Subscription Required"
 msgstr "Wymagana subskrypcja"
 
-#: src/components/AuthForm.tsx:215
-#: src/components/AuthForm.tsx:232
+#: src/components/AuthForm.tsx:216
+#: src/components/AuthForm.tsx:233
 msgid "Success"
 msgstr "Sukces"
+
+#. placeholder {0}: data.cardsCreated
+#. placeholder {1}: data.listName
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:43
+msgid "Successfully imported {0} cards into \"{1}\"{warningMessage}"
+msgstr ""
 
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:57
 msgid "Supercharge your workspace for just $29/month. Here's what you'll get:"
@@ -1958,8 +2051,8 @@ msgstr "Plan zespołowy"
 msgid "Teams"
 msgstr "Zespoły"
 
-#: src/views/board/index.tsx:361
-#: src/views/board/index.tsx:396
+#: src/views/board/index.tsx:369
+#: src/views/board/index.tsx:404
 msgid "Template"
 msgstr "Szablon"
 
@@ -2160,8 +2253,8 @@ msgstr "Nie można zaktualizować adresu URL tablicy"
 msgid "Unable to update board visibility"
 msgstr "Nie można zaktualizować widoczności tablicy"
 
-#: src/views/board/index.tsx:204
-#: src/views/card/index.tsx:174
+#: src/views/board/index.tsx:205
+#: src/views/card/index.tsx:175
 msgid "Unable to update card"
 msgstr "Nie można zaktualizować karty"
 
@@ -2181,7 +2274,7 @@ msgstr "Nie można zaktualizować komentarza"
 msgid "Unable to update labels"
 msgstr "Nie można zaktualizować etykiet"
 
-#: src/views/board/index.tsx:148
+#: src/views/board/index.tsx:149
 #: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Nie można zaktualizować listy"
@@ -2245,6 +2338,10 @@ msgstr "Nieograniczona liczba przestrzeni roboczych"
 msgid "Update"
 msgstr "Aktualizuj"
 
+#: src/views/card/components/Attachments.tsx:61
+msgid "Update failed"
+msgstr ""
+
 #: src/components/LabelForm.tsx:238
 msgid "Update label"
 msgstr "Zaktualizuj etykietę"
@@ -2276,6 +2373,15 @@ msgstr "Ulepsz do planu Pro"
 msgid "Upgrade to Pro ($29/month)"
 msgstr "Ulepsz do planu Pro (29 USD/miesiąc)"
 
+#: src/views/card/components/Attachments.tsx:33
+#: src/views/card/components/Attachments.tsx:103
+msgid "Upload failed"
+msgstr ""
+
+#: src/views/card/components/Attachments.tsx:125
+msgid "Uploading..."
+msgstr ""
+
 #: src/views/boards/components/TemplateBoards.tsx:38
 #: src/views/boards/components/TemplateBoards.tsx:55
 msgid "Urgent"
@@ -2300,6 +2406,10 @@ msgstr "Adres URL musi mieć co najmniej 3 znaki"
 msgid "Use template"
 msgstr "Użyj szablonu"
 
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:141
+msgid "Use this template"
+msgstr ""
+
 #: src/views/members/index.tsx:237
 msgid "User"
 msgstr "Użytkownik"
@@ -2307,6 +2417,14 @@ msgstr "Użytkownik"
 #: src/views/members/components/InviteMemberForm.tsx:98
 msgid "User is already a member of this workspace"
 msgstr "Użytkownik jest już członkiem tego obszaru roboczego"
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:66
+msgid "Valid JSON"
+msgstr ""
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:196
+msgid "Validate JSON"
+msgstr ""
 
 #: src/views/boards/components/TemplateBoards.tsx:38
 msgid "Video"
@@ -2374,7 +2492,7 @@ msgid "Why make an open source Trello?"
 msgstr "Dlaczego próbujecie stworzyć Trello w wersji otwartoźródłowej?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:361
+#: src/views/board/index.tsx:369
 #: src/views/boards/index.tsx:22
 #: src/views/members/index.tsx:173
 #: src/views/public/board/index.tsx:100
@@ -2475,11 +2593,11 @@ msgstr "Możesz zaprosić członków zespołu, klikając przycisk \"Zaproś\" w 
 msgid "You can self-host by following the instructions in our <0>repo</0>."
 msgstr "Możesz hostować samodzielnie, postępując zgodnie z instrukcjami w naszym <0>repozytorium</0>."
 
-#: src/components/AuthForm.tsx:233
+#: src/components/AuthForm.tsx:234
 msgid "You have been logged in successfully."
 msgstr "Zostałeś pomyślnie zalogowany."
 
-#: src/components/AuthForm.tsx:216
+#: src/components/AuthForm.tsx:217
 msgid "You have been signed up successfully."
 msgstr "Zostałeś pomyślnie zarejestrowany."
 
@@ -2506,6 +2624,10 @@ msgstr "Twoje tablice zostały zaimportowane."
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:42
 msgid "Your display name has been updated."
 msgstr "Twoja nazwa wyświetlana została zaktualizowana."
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:67
+msgid "Your JSON is valid and ready to import"
+msgstr ""
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:70
 msgid "Your password has been changed."

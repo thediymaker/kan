@@ -134,6 +134,13 @@
       "when": 1760044396109,
       "tag": "20251009211316_AddBoardSourceIdToCardActivity",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1732252800000,
+      "tag": "20251122120000_create_card_attachments",
+      "breakpoints": true
     }
   ]
 }

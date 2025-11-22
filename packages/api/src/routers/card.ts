@@ -1,15 +1,39 @@
+import {
+  DeleteObjectCommand,
+  GetObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import * as cardRepo from "@kan/db/repository/card.repo";
 import * as cardActivityRepo from "@kan/db/repository/cardActivity.repo";
+import * as cardAttachmentRepo from "@kan/db/repository/cardAttachment.repo";
 import * as cardCommentRepo from "@kan/db/repository/cardComment.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
+
+const s3Client = new S3Client({
+  region: process.env.S3_REGION ?? "auto",
+  endpoint: process.env.S3_ENDPOINT ?? "",
+  forcePathStyle: process.env.S3_FORCE_PATH_STYLE === "true",
+  credentials: {
+    accessKeyId: process.env.S3_ACCESS_KEY_ID ?? "",
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY ?? "",
+  },
+});
+
+const ATTACHMENT_BUCKET_NAME = "card-attachments";
 
 export const cardRouter = createTRPCRouter({
   create: protectedProcedure
@@ -808,6 +832,220 @@ export const cardRouter = createTRPCRouter({
       await cardActivityRepo.create(ctx.db, {
         type: "card.archived",
         cardId: card.id,
+        createdBy: userId,
+      });
+
+      return { success: true };
+    }),
+  getAttachments: protectedProcedure
+    .input(z.object({ cardPublicId: z.string().min(12) }))
+    .query(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card) throw new TRPCError({ code: "NOT_FOUND" });
+
+      if (card.workspaceVisibility === "private") {
+        await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
+      }
+
+      const attachments = await cardAttachmentRepo.getAllByCardId(
+        ctx.db,
+        card.id,
+      );
+
+      const attachmentsWithUrls = await Promise.all(
+        attachments.map(async (attachment) => {
+          const command = new GetObjectCommand({
+            Bucket: ATTACHMENT_BUCKET_NAME,
+            Key: attachment.filePath,
+          });
+          const url = await getSignedUrl(s3Client, command, {
+            expiresIn: 3600,
+          });
+          return { ...attachment, url };
+        }),
+      );
+
+      return attachmentsWithUrls;
+    }),
+  getPresignedUploadUrl: protectedProcedure
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+        fileName: z.string(),
+        fileType: z.string(),
+        fileSize: z.number(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card) throw new TRPCError({ code: "NOT_FOUND" });
+
+      await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
+
+      const fileExtension = input.fileName.split(".").pop() ?? "";
+      const filePath = `${card.id}/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExtension}`;
+
+      const command = new PutObjectCommand({
+        Bucket: ATTACHMENT_BUCKET_NAME,
+        Key: filePath,
+        ContentType: input.fileType,
+      });
+
+      const uploadUrl = await getSignedUrl(s3Client, command, {
+        expiresIn: 3600,
+      });
+
+      return { uploadUrl, filePath };
+    }),
+  createAttachment: protectedProcedure
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+        fileName: z.string(),
+        fileType: z.string(),
+        fileSize: z.number(),
+        filePath: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card) throw new TRPCError({ code: "NOT_FOUND" });
+
+      await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
+
+      const attachment = await cardAttachmentRepo.create(ctx.db, {
+        cardId: card.id,
+        fileName: input.fileName,
+        fileSize: input.fileSize,
+        fileType: input.fileType,
+        filePath: input.filePath,
+        createdBy: userId,
+      });
+
+      if (!attachment) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to create attachment",
+        });
+      }
+
+      await cardActivityRepo.create(ctx.db, {
+        type: "card.updated.attachment.added" as const,
+        cardId: card.id,
+        attachmentId: attachment.id,
+        createdBy: userId,
+      });
+
+      return attachment;
+    }),
+  deleteAttachment: protectedProcedure
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+        attachmentPublicId: z.string().min(12),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card) throw new TRPCError({ code: "NOT_FOUND" });
+
+      await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
+
+      const attachment = await cardAttachmentRepo.getByPublicId(
+        ctx.db,
+        input.attachmentPublicId,
+      );
+
+      if (!attachment) throw new TRPCError({ code: "NOT_FOUND" });
+
+      // Soft delete
+      await cardAttachmentRepo.softDelete(ctx.db, {
+        attachmentId: attachment.id,
+        deletedBy: userId,
+      });
+
+      // Optionally delete from S3 or keep it for soft delete history
+      // Since it's a soft delete, we keep the file in S3 for now.
+
+      await cardActivityRepo.create(ctx.db, {
+        type: "card.updated.attachment.deleted" as const,
+        cardId: card.id,
+        attachmentId: attachment.id,
+        createdBy: userId,
+      });
+
+      return { success: true };
+    }),
+  setCoverImage: protectedProcedure
+    .input(
+      z.object({
+        cardPublicId: z.string().min(12),
+        attachmentPublicId: z.string().min(12).nullable(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.user?.id;
+      if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+      const card = await cardRepo.getWorkspaceAndCardIdByCardPublicId(
+        ctx.db,
+        input.cardPublicId,
+      );
+
+      if (!card) throw new TRPCError({ code: "NOT_FOUND" });
+
+      await assertUserInWorkspace(ctx.db, userId, card.workspaceId);
+
+      let attachmentId: number | null = null;
+
+      if (input.attachmentPublicId) {
+        const attachment = await cardAttachmentRepo.getByPublicId(
+          ctx.db,
+          input.attachmentPublicId,
+        );
+        if (!attachment) throw new TRPCError({ code: "NOT_FOUND" });
+        attachmentId = attachment.id;
+      }
+
+      await cardRepo.setCoverImage(ctx.db, {
+        cardId: card.id,
+        attachmentId,
+      });
+
+      await cardActivityRepo.create(ctx.db, {
+        type: attachmentId
+          ? ("card.updated.cover.updated" as const)
+          : ("card.updated.cover.removed" as const),
+        cardId: card.id,
+        ...(attachmentId !== null && { attachmentId }),
         createdBy: userId,
       });
 

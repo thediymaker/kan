@@ -33,6 +33,10 @@ export const activityTypes = [
   "card.updated.comment.added",
   "card.updated.comment.updated",
   "card.updated.comment.deleted",
+  "card.updated.attachment.added",
+  "card.updated.attachment.deleted",
+  "card.updated.cover.updated",
+  "card.updated.cover.removed",
   // Checklist activities
   "card.updated.checklist.added",
   "card.updated.checklist.renamed",
@@ -68,6 +72,30 @@ export const cards = pgTable("card", {
     .notNull()
     .references(() => lists.id, { onDelete: "cascade" }),
   importId: bigint("importId", { mode: "number" }).references(() => imports.id),
+  coverAttachmentId: bigint("coverAttachmentId", { mode: "number" }),
+}).enableRLS();
+
+export const cardAttachments = pgTable("card_attachments", {
+  id: bigserial("id", { mode: "number" }).primaryKey(),
+  publicId: varchar("publicId", { length: 12 }).notNull().unique(),
+  cardId: bigint("cardId", { mode: "number" })
+    .notNull()
+    .references(() => cards.id, { onDelete: "cascade" }),
+  fileName: text("fileName").notNull(),
+  fileSize: integer("fileSize").notNull(),
+  fileType: text("fileType").notNull(),
+  filePath: text("filePath").notNull(),
+  createdBy: uuid("createdBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
+  createdAt: timestamp("createdAt", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updatedAt", { withTimezone: true }),
+  deletedAt: timestamp("deletedAt", { withTimezone: true }),
+  deletedBy: uuid("deletedBy").references(() => users.id, {
+    onDelete: "set null",
+  }),
 }).enableRLS();
 
 export const cardsRelations = relations(cards, ({ one, many }) => ({
@@ -96,7 +124,34 @@ export const cardsRelations = relations(cards, ({ one, many }) => ({
   comments: many(comments),
   activities: many(cardActivities),
   checklists: many(checklists),
+  attachments: many(cardAttachments),
+  coverAttachment: one(cardAttachments, {
+    fields: [cards.coverAttachmentId],
+    references: [cardAttachments.id],
+    relationName: "cardCoverAttachment",
+  }),
 }));
+
+export const cardAttachmentsRelations = relations(
+  cardAttachments,
+  ({ one }) => ({
+    card: one(cards, {
+      fields: [cardAttachments.cardId],
+      references: [cards.id],
+      relationName: "cardAttachmentsCard",
+    }),
+    createdBy: one(users, {
+      fields: [cardAttachments.createdBy],
+      references: [users.id],
+      relationName: "cardAttachmentsCreatedByUser",
+    }),
+    deletedBy: one(users, {
+      fields: [cardAttachments.deletedBy],
+      references: [users.id],
+      relationName: "cardAttachmentsDeletedByUser",
+    }),
+  }),
+);
 
 export const cardActivities = pgTable("card_activity", {
   id: bigserial("id", { mode: "number" }).primaryKey(),
@@ -131,6 +186,10 @@ export const cardActivities = pgTable("card_activity", {
   commentId: bigint("commentId", { mode: "number" }).references(
     () => comments.id,
     { onDelete: "cascade" },
+  ),
+  attachmentId: bigint("attachmentId", { mode: "number" }).references(
+    () => cardAttachments.id,
+    { onDelete: "set null" },
   ),
   fromComment: text("fromComment"),
   toComment: text("toComment"),
@@ -180,6 +239,11 @@ export const cardActivitiesRelations = relations(cardActivities, ({ one }) => ({
     fields: [cardActivities.commentId],
     references: [comments.id],
     relationName: "cardActivitiesComment",
+  }),
+  attachment: one(cardAttachments, {
+    fields: [cardActivities.attachmentId],
+    references: [cardAttachments.id],
+    relationName: "cardActivitiesAttachment",
   }),
 }));
 

@@ -5,6 +5,7 @@ import type { BoardVisibilityStatus } from "@kan/db/schema";
 import {
   boards,
   cardActivities,
+  cardAttachments,
   cards,
   cardsToLabels,
   cardToWorkspaceMembers,
@@ -162,8 +163,16 @@ export const getByPublicId = async (
               description: true,
               listId: true,
               index: true,
+              coverAttachmentId: true,
             },
             with: {
+              coverAttachment: {
+                columns: {
+                  publicId: true,
+                  filePath: true,
+                  fileName: true,
+                },
+              },
               labels: {
                 with: {
                   label: {
@@ -330,8 +339,16 @@ export const getBySlug = async (
               description: true,
               listId: true,
               index: true,
+              coverAttachmentId: true,
             },
             with: {
+              coverAttachment: {
+                columns: {
+                  publicId: true,
+                  filePath: true,
+                  fileName: true,
+                },
+              },
               labels: {
                 with: {
                   label: {
@@ -579,7 +596,7 @@ export const isBoardSlugAvailable = async (
   db: dbClient,
   boardSlug: string,
   workspaceId: number,
-) => {
+  ) => {
   const result = await db.query.boards.findFirst({
     columns: {
       id: true,

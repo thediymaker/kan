@@ -23,6 +23,7 @@ export const create = async (
     fromComment?: string;
     toComment?: string;
     sourceBoardId?: number;
+    attachmentId?: number;
   },
 ) => {
   const [result] = await db
@@ -46,6 +47,7 @@ export const create = async (
       fromComment: activityInput.fromComment,
       toComment: activityInput.toComment,
       sourceBoardId: activityInput.sourceBoardId,
+      attachmentId: activityInput.attachmentId,
     })
     .returning({ id: cardActivities.id });
 

@@ -558,6 +558,7 @@ export default function BoardPage({ isTemplate }: { isTemplate?: boolean }) {
                                               card.description ?? null
                                             }
                                             comments={card.comments ?? []}
+                                            coverUrl={card.coverUrl}
                                           />
                                         </Link>
                                       )}

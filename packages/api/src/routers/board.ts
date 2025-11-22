@@ -1,17 +1,73 @@
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
+import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as boardRepo from "@kan/db/repository/board.repo";
 import * as cardRepo from "@kan/db/repository/card.repo";
-import * as activityRepo from "@kan/db/repository/cardActivity.repo";
 import * as labelRepo from "@kan/db/repository/label.repo";
 import * as listRepo from "@kan/db/repository/list.repo";
 import * as workspaceRepo from "@kan/db/repository/workspace.repo";
 import { colours } from "@kan/shared/constants";
 import { generateSlug, generateUID } from "@kan/shared/utils";
 
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "../trpc";
 import { assertUserInWorkspace } from "../utils/auth";
+
+const s3Client = new S3Client({
+  region: process.env.S3_REGION ?? "auto",
+  endpoint: process.env.S3_ENDPOINT ?? "",
+  forcePathStyle: process.env.S3_FORCE_PATH_STYLE === "true",
+  credentials: {
+    accessKeyId: process.env.S3_ACCESS_KEY_ID ?? "",
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY ?? "",
+  },
+});
+
+const ATTACHMENT_BUCKET_NAME = "card-attachments";
+
+const signBoardCoverImages = async <T extends { lists: Array<{ cards: Array<{ coverAttachment?: { filePath: string } | null }> }> }>(
+  board: T | null,
+): Promise<T | null> => {
+  if (!board) return null;
+
+  const listsWithSignedCards = await Promise.all(
+    board.lists.map(async (list) => {
+      const cardsWithSignedCovers = await Promise.all(
+        list.cards.map(async (card) => {
+          let coverUrl: string | undefined;
+          if (card.coverAttachment) {
+            const command = new GetObjectCommand({
+              Bucket: ATTACHMENT_BUCKET_NAME,
+              Key: card.coverAttachment.filePath,
+            });
+            coverUrl = await getSignedUrl(s3Client, command, {
+              expiresIn: 3600,
+            });
+          }
+          return {
+            ...card,
+            coverUrl,
+          };
+        }),
+      );
+      return {
+        ...list,
+        cards: cardsWithSignedCovers,
+      };
+    }),
+  );
+
+  return {
+    ...board,
+    lists: listsWithSignedCards,
+  } as T;
+};
 
 export const boardRouter = createTRPCRouter({
   all: protectedProcedure
@@ -81,7 +137,7 @@ export const boardRouter = createTRPCRouter({
         type: z.enum(["regular", "template"]).optional(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof boardRepo.getByPublicId>>>())
+    .output(z.custom<Awaited<ReturnType<typeof signBoardCoverImages>>>())
     .query(async ({ ctx, input }) => {
       const userId = ctx.user?.id;
 
@@ -114,7 +170,7 @@ export const boardRouter = createTRPCRouter({
         },
       );
 
-      return result;
+      return await signBoardCoverImages(result);
     }),
   bySlug: publicProcedure
     .meta({
@@ -144,7 +200,7 @@ export const boardRouter = createTRPCRouter({
         labels: z.array(z.string().min(12)).optional(),
       }),
     )
-    .output(z.custom<Awaited<ReturnType<typeof boardRepo.getBySlug>>>())
+    .output(z.custom<Awaited<ReturnType<typeof signBoardCoverImages>>>())
     .query(async ({ ctx, input }) => {
       const workspace = await workspaceRepo.getBySlugWithBoards(
         ctx.db,
@@ -167,7 +223,7 @@ export const boardRouter = createTRPCRouter({
         },
       );
 
-      return result;
+      return await signBoardCoverImages(result);
     }),
   create: protectedProcedure
     .meta({

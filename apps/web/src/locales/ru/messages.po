@@ -31,7 +31,7 @@ msgstr "{0}"
 #. placeholder {1}: board?.name ?? t`Board`
 #. placeholder {1}: workspace.name ?? t`Workspace`
 #: src/views/boards/index.tsx:22
-#: src/views/card/index.tsx:216
+#: src/views/card/index.tsx:217
 msgid "{0} | {1}"
 msgstr "{0} | {1}"
 
@@ -41,7 +41,7 @@ msgid "{0} labels"
 msgstr "{0} метки"
 
 #. placeholder {0}: isTemplate ? "Template" : "Board"
-#: src/views/board/index.tsx:387
+#: src/views/board/index.tsx:395
 msgid "{0} not found"
 msgstr "{0} не найден"
 
@@ -79,7 +79,7 @@ msgstr "Аккаунт"
 msgid "Account deleted"
 msgstr "Аккаунт удалён"
 
-#: src/views/card/index.tsx:291
+#: src/views/card/index.tsx:296
 #: src/views/public/board/CardModal.tsx:143
 msgid "Activity"
 msgstr "Активность"
@@ -91,6 +91,10 @@ msgstr "Журнал активности"
 #: src/views/home/components/Features.tsx:110
 msgid "Activity logs"
 msgstr "Журналы активности"
+
+#: src/views/card/components/Attachments.tsx:125
+msgid "Add"
+msgstr ""
 
 #: src/views/board/components/List.tsx:110
 msgid "Add a card"
@@ -270,6 +274,10 @@ msgstr "назначено <0>{0}</0> к карточке"
 msgid "Assignees"
 msgstr "Исполнители"
 
+#: src/views/card/components/Attachments.tsx:117
+msgid "Attachments"
+msgstr ""
+
 #: src/views/boards/components/TemplateBoards.tsx:47
 msgid "Awaiting Customer"
 msgstr "Ожидание клиента"
@@ -304,8 +312,8 @@ msgstr "Портал выставления счетов"
 msgid "Blog Post"
 msgstr "Пост в блоге"
 
-#: src/views/board/index.tsx:361
-#: src/views/card/index.tsx:216
+#: src/views/board/index.tsx:369
+#: src/views/card/index.tsx:217
 #: src/views/public/board/index.tsx:100
 msgid "Board"
 msgstr "Доска"
@@ -387,11 +395,11 @@ msgstr "Отчет об ошибке"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/views/card/index.tsx:216
+#: src/views/card/index.tsx:217
 msgid "Card"
 msgstr "Карточка"
 
-#: src/views/card/index.tsx:262
+#: src/views/card/index.tsx:263
 msgid "Card not found"
 msgstr "Карточка не найдена"
 
@@ -519,12 +527,12 @@ msgstr "Свяжитесь с нами"
 msgid "Content Creation"
 msgstr "Создание контента"
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:421
 msgid "Continue with "
 msgstr "Продолжить с "
 
 #. placeholder {0}: key === "oidc" ? oidcProviderName : provider.name
-#: src/components/AuthForm.tsx:351
+#: src/components/AuthForm.tsx:352
 msgid "Continue with {0}"
 msgstr "Продолжить с {0}"
 
@@ -585,7 +593,7 @@ msgstr "Создать новый ключ"
 msgid "Create new label"
 msgstr "Создать новую метку"
 
-#: src/views/board/index.tsx:475
+#: src/views/board/index.tsx:483
 msgid "Create new list"
 msgstr "Создать новый список"
 
@@ -655,6 +663,7 @@ msgstr "Деактивировать ссылку-приглашение"
 #: src/components/DeleteLabelConfirmation.tsx:51
 #: src/components/LabelForm.tsx:228
 #: src/views/board/components/DeleteBoardConfirmation.tsx:47
+#: src/views/card/components/Attachments.tsx:182
 #: src/views/card/components/DeleteCardConfirmation.tsx:92
 #: src/views/card/components/DeleteChecklistConfirmation.tsx:66
 #: src/views/card/components/DeleteCommentConfirmation.tsx:82
@@ -667,7 +676,7 @@ msgstr "Удалить"
 msgid "Delete account"
 msgstr "Удалить аккаунт"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:89
 msgid "Delete board"
 msgstr "Удалить доску"
 
@@ -679,11 +688,15 @@ msgstr "Удалить карточку"
 msgid "Delete comment"
 msgstr "Удалить комментарий"
 
+#: src/views/card/components/Attachments.tsx:48
+msgid "Delete failed"
+msgstr ""
+
 #: src/views/board/components/List.tsx:117
 msgid "Delete list"
 msgstr "Удалить список"
 
-#: src/views/board/components/BoardDropdown.tsx:48
+#: src/views/board/components/BoardDropdown.tsx:89
 msgid "Delete template"
 msgstr "Удалить шаблон"
 
@@ -769,7 +782,7 @@ msgstr "Нет аккаунта? <0><1>Зарегистрируйтесь</1></0
 msgid "Done"
 msgstr "Готово"
 
-#: src/views/board/components/BoardDropdown.tsx:41
+#: src/views/board/components/BoardDropdown.tsx:82
 #: src/views/board/components/UpdateBoardSlugForm.tsx:115
 msgid "Edit board URL"
 msgstr "Изменить URL доски"
@@ -790,7 +803,7 @@ msgstr "Редактировать URL рабочей области"
 msgid "Editing"
 msgstr "Редактирование"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:422
 msgid "email"
 msgstr "email"
 
@@ -810,11 +823,11 @@ msgstr "Введите ваш текущий пароль"
 msgid "Enter your current password and choose a new secure password."
 msgstr "Введите ваш текущий пароль и выберите новый безопасный пароль."
 
-#: src/components/AuthForm.tsx:387
+#: src/components/AuthForm.tsx:388
 msgid "Enter your email address"
 msgstr "Введите ваш адрес электронной почты"
 
-#: src/components/AuthForm.tsx:375
+#: src/components/AuthForm.tsx:376
 msgid "Enter your name"
 msgstr "Введите ваше имя"
 
@@ -822,7 +835,7 @@ msgstr "Введите ваше имя"
 msgid "Enter your new password"
 msgstr "Введите ваш новый пароль"
 
-#: src/components/AuthForm.tsx:400
+#: src/components/AuthForm.tsx:402
 msgid "Enter your password"
 msgstr "Введите ваш пароль"
 
@@ -913,6 +926,10 @@ msgstr "Все, что вам нужно, бесплатно навсегда. �
 msgid "Execution"
 msgstr "Выполнение"
 
+#: src/views/board/components/BoardDropdown.tsx:68
+msgid "Export to JSON"
+msgstr ""
+
 #: src/views/invite/index.tsx:41
 msgid "Failed to accept invitation. Please try again later, or contact customer support."
 msgstr "Не удалось принять приглашение. Пожалуйста, попробуйте позже или свяжитесь со службой поддержки."
@@ -926,10 +943,23 @@ msgstr "Не удалось скопировать ссылку приглаше
 msgid "Failed to create board"
 msgstr "Не удалось создать доску"
 
+#: src/views/card/components/Attachments.tsx:49
+msgid "Failed to delete attachment"
+msgstr ""
+
 #. placeholder {0}: provider.at(0)?.toUpperCase() + provider.slice(1)
-#: src/components/AuthForm.tsx:291
+#: src/components/AuthForm.tsx:292
 msgid "Failed to login with {0}. Please try again."
 msgstr "Не удалось войти с {0}. Пожалуйста, попробуйте снова."
+
+#: src/views/card/components/Attachments.tsx:62
+msgid "Failed to update cover image"
+msgstr ""
+
+#: src/views/card/components/Attachments.tsx:34
+#: src/views/card/components/Attachments.tsx:104
+msgid "Failed to upload attachment"
+msgstr ""
 
 #: src/views/home/components/Header.tsx:41
 msgid "FAQ"
@@ -987,6 +1017,8 @@ msgid "For long-term sustainability, we recognise all good open source projects 
 msgstr "Для долгосрочной устойчивости мы признаем, что всем хорошим проектам с открытым исходным кодом необходим источник дохода. Наш доход поступает от платного облачного предложения для рабочих пространств с несколькими пользователями и для пользовательских идентификаторов рабочих пространств. Нет обязательства использовать его, и вы можете самостоятельно разместить программное обеспечение на своей инфраструктуре бесплатно."
 
 #: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/Pricing.tsx:32
+#: src/views/pricing/components/PricingTiers.tsx:30
 #: src/views/pricing/components/PricingTiers.tsx:30
 msgid "Free"
 msgstr "Бесплатно"
@@ -1028,7 +1060,7 @@ msgstr "Начать"
 msgid "Get started by creating a new {0}"
 msgstr "Начните с создания нового {0}"
 
-#: src/views/board/index.tsx:467
+#: src/views/board/index.tsx:475
 msgid "Get started by creating a new list"
 msgstr "Начните с создания нового списка"
 
@@ -1115,6 +1147,15 @@ msgstr "Идеи для улучшения этой страницы..."
 msgid "Import"
 msgstr "Импорт"
 
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:206
+msgid "Import Cards"
+msgstr ""
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:100
+msgid "Import Cards from JSON"
+msgstr ""
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:42
 #: src/views/boards/components/ImportBoardsForm.tsx:191
 msgid "Import complete"
 msgstr "Импорт завершён"
@@ -1122,6 +1163,10 @@ msgstr "Импорт завершён"
 #: src/views/boards/components/ImportBoardsForm.tsx:204
 msgid "Import failed"
 msgstr "Импорт не удался"
+
+#: src/views/board/components/BoardDropdown.tsx:61
+msgid "Import from JSON"
+msgstr ""
 
 #: src/views/pricing/components/FeatureComparisonTable.tsx:80
 msgid "Import from Trello"
@@ -1179,6 +1224,11 @@ msgstr "Недействительный адрес электронной по�
 msgid "Invalid invitation"
 msgstr "Недействительное приглашение"
 
+#. placeholder {0}: error instanceof Error ? error.message : "Unknown error"
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:72
+msgid "Invalid JSON format: {0}"
+msgstr ""
+
 #: src/views/members/index.tsx:221
 msgid "Invite"
 msgstr "Пригласить"
@@ -1217,6 +1267,14 @@ msgstr "Присоединиться к рабочему пространств�
 msgid "Join workspace | kan.bn"
 msgstr "Присоединиться к рабочему пространству | kan.bn"
 
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:163
+msgid "JSON Data"
+msgstr ""
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:120
+msgid "JSON Template"
+msgstr ""
+
 #: src/views/boards/components/TemplateBoards.tsx:70
 msgid "Junior"
 msgstr "Младший"
@@ -1244,7 +1302,7 @@ msgstr "Имейте в виду, что это действие необрат�
 
 #: src/views/board/components/Filters.tsx:101
 #: src/views/board/components/NewCardForm.tsx:408
-#: src/views/card/index.tsx:117
+#: src/views/card/index.tsx:118
 msgid "Labels"
 msgstr "Метки"
 
@@ -1298,7 +1356,7 @@ msgstr "Светлый"
 msgid "Link copied"
 msgstr "Ссылка скопирована"
 
-#: src/views/card/index.tsx:109
+#: src/views/card/index.tsx:110
 msgid "List"
 msgstr "Список"
 
@@ -1326,11 +1384,15 @@ msgstr "Любим командами по всему миру"
 msgid "Low Priority"
 msgstr "Низкий приоритет"
 
-#: src/components/AuthForm.tsx:421
+#: src/components/AuthForm.tsx:422
 msgid "magic link"
 msgstr "магическая ссылка"
 
-#: src/views/board/components/BoardDropdown.tsx:34
+#: src/views/card/components/Attachments.tsx:169
+msgid "Make cover"
+msgstr ""
+
+#: src/views/board/components/BoardDropdown.tsx:75
 msgid "Make template"
 msgstr "Создать шаблон"
 
@@ -1350,7 +1412,7 @@ msgstr "Средний приоритет"
 #: src/components/SideNavigation.tsx:101
 #: src/views/board/components/Filters.tsx:93
 #: src/views/board/components/NewCardForm.tsx:366
-#: src/views/card/index.tsx:126
+#: src/views/card/index.tsx:127
 #: src/views/members/index.tsx:178
 msgid "Members"
 msgstr "Участники"
@@ -1420,7 +1482,7 @@ msgid "New label"
 msgstr "Новая метка"
 
 #: src/views/board/components/NewListForm.tsx:112
-#: src/views/board/index.tsx:439
+#: src/views/board/index.tsx:447
 msgid "New list"
 msgstr "Новый список"
 
@@ -1465,7 +1527,7 @@ msgstr "Доски не найдены"
 msgid "No credit card required"
 msgstr "Кредитная карта не требуется"
 
-#: src/views/board/index.tsx:464
+#: src/views/board/index.tsx:472
 msgid "No lists"
 msgstr "Нет списков"
 
@@ -1489,6 +1551,10 @@ msgstr "После удаления аккаунта возврат будет �
 msgid "Once you delete your workspace, there is no going back. This action cannot be undone."
 msgstr "После удаления рабочего пространства возврат будет невозможен. Это действие необратимо."
 
+#: src/views/card/components/Attachments.tsx:151
+msgid "Open"
+msgstr ""
+
 #: src/views/pricing/components/FeatureComparisonTable.tsx:150
 msgid "Open source"
 msgstr "С открытым исходным кодом"
@@ -1497,7 +1563,7 @@ msgstr "С открытым исходным кодом"
 msgid "Open Source Friends"
 msgstr "Друзья с открытым исходным кодом"
 
-#: src/components/AuthForm.tsx:365
+#: src/components/AuthForm.tsx:366
 msgid "or"
 msgstr "или"
 
@@ -1527,11 +1593,15 @@ msgstr "Частичная занятость"
 msgid "Password Changed"
 msgstr "Пароль изменён"
 
-#: src/components/AuthForm.tsx:258
+#: src/components/AuthForm.tsx:400
+msgid "Password is required"
+msgstr ""
+
+#: src/components/AuthForm.tsx:259
 msgid "Password is required to login."
 msgstr "Пароль необходим для входа."
 
-#: src/components/AuthForm.tsx:257
+#: src/components/AuthForm.tsx:258
 msgid "Password is required to sign up."
 msgstr "Пароль необходим для регистрации."
 
@@ -1542,6 +1612,14 @@ msgstr "Пароль должен содержать не менее 8 симв�
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:27
 msgid "Passwords do not match"
 msgstr "Пароли не совпадают"
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:150
+msgid "Paste your JSON data below. The JSON should include a list name and an array of cards with optional labels and checklists."
+msgstr ""
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:172
+msgid "Paste your JSON here..."
+msgstr ""
 
 #: src/views/members/index.tsx:134
 msgid "Paused"
@@ -1579,17 +1657,22 @@ msgstr "Платформа"
 msgid "Please confirm your new password"
 msgstr "Пожалуйста, подтвердите новый пароль"
 
-#: src/components/AuthForm.tsx:391
+#: src/components/AuthForm.tsx:392
 msgid "Please enter a valid email address"
 msgstr "Пожалуйста, введите действительный адрес электронной почты"
 
-#: src/components/AuthForm.tsx:379
+#: src/components/AuthForm.tsx:380
 msgid "Please enter a valid name"
 msgstr "Пожалуйста, введите действительное имя"
 
-#: src/components/AuthForm.tsx:404
+#: src/components/AuthForm.tsx:406
 msgid "Please enter a valid password"
 msgstr "Пожалуйста, введите действительный пароль"
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:59
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:81
+msgid "Please enter JSON data"
+msgstr ""
 
 #: src/views/settings/components/Avatar.tsx:92
 msgid "Please select a file to upload."
@@ -1604,8 +1687,8 @@ msgstr "Пожалуйста, выберите файл для загрузки.
 #: src/views/board/components/NewTemplateForm.tsx:77
 #: src/views/board/components/UpdateBoardSlugForm.tsx:72
 #: src/views/board/components/VisibilityButton.tsx:53
-#: src/views/board/index.tsx:149
-#: src/views/board/index.tsx:205
+#: src/views/board/index.tsx:150
+#: src/views/board/index.tsx:206
 #: src/views/boards/components/ImportBoardsForm.tsx:205
 #: src/views/card/components/ChecklistItemRow.tsx:60
 #: src/views/card/components/ChecklistItemRow.tsx:88
@@ -1620,7 +1703,7 @@ msgstr "Пожалуйста, выберите файл для загрузки.
 #: src/views/card/components/NewChecklistForm.tsx:70
 #: src/views/card/components/NewChecklistItemForm.tsx:89
 #: src/views/card/components/NewCommentForm.tsx:31
-#: src/views/card/index.tsx:175
+#: src/views/card/index.tsx:176
 #: src/views/members/components/DeleteMemberConfirmation.tsx:28
 #: src/views/members/components/InviteMemberForm.tsx:104
 #: src/views/members/components/InviteMemberForm.tsx:241
@@ -1715,6 +1798,10 @@ msgstr "Удалённый"
 #: src/views/members/components/DeleteMemberConfirmation.tsx:58
 msgid "Remove"
 msgstr "Удалить"
+
+#: src/views/card/components/Attachments.tsx:168
+msgid "Remove cover"
+msgstr ""
 
 #: src/views/members/index.tsx:148
 msgid "Remove member"
@@ -1886,7 +1973,7 @@ msgstr "Регистрация отключена"
 msgid "Sign up is currently disabled. Please try again later."
 msgstr "Регистрация в настоящее время отключена. Пожалуйста, попробуйте позже."
 
-#: src/components/AuthForm.tsx:420
+#: src/components/AuthForm.tsx:421
 msgid "Sign up with "
 msgstr "Зарегистрироваться с "
 
@@ -1920,10 +2007,16 @@ msgstr "Начать 14-дневную бесплатную пробную ве�
 msgid "Subscription Required"
 msgstr "Требуется подписка"
 
-#: src/components/AuthForm.tsx:215
-#: src/components/AuthForm.tsx:232
+#: src/components/AuthForm.tsx:216
+#: src/components/AuthForm.tsx:233
 msgid "Success"
 msgstr "Успех"
+
+#. placeholder {0}: data.cardsCreated
+#. placeholder {1}: data.listName
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:43
+msgid "Successfully imported {0} cards into \"{1}\"{warningMessage}"
+msgstr ""
 
 #: src/views/settings/components/UpgradeToProConfirmation.tsx:57
 msgid "Supercharge your workspace for just $29/month. Here's what you'll get:"
@@ -1953,8 +2046,8 @@ msgstr "Командный план"
 msgid "Teams"
 msgstr "Команды"
 
-#: src/views/board/index.tsx:361
-#: src/views/board/index.tsx:396
+#: src/views/board/index.tsx:369
+#: src/views/board/index.tsx:404
 msgid "Template"
 msgstr "Шаблон"
 
@@ -2155,8 +2248,8 @@ msgstr "Не удалось обновить URL доски"
 msgid "Unable to update board visibility"
 msgstr "Не удалось обновить видимость доски"
 
-#: src/views/board/index.tsx:204
-#: src/views/card/index.tsx:174
+#: src/views/board/index.tsx:205
+#: src/views/card/index.tsx:175
 msgid "Unable to update card"
 msgstr "Не удалось обновить карточку"
 
@@ -2176,7 +2269,7 @@ msgstr "Не удалось обновить комментарий"
 msgid "Unable to update labels"
 msgstr "Не удалось обновить метки"
 
-#: src/views/board/index.tsx:148
+#: src/views/board/index.tsx:149
 #: src/views/card/components/ListSelector.tsx:51
 msgid "Unable to update list"
 msgstr "Не удалось обновить список"
@@ -2240,6 +2333,10 @@ msgstr "Неограниченное количество рабочих про�
 msgid "Update"
 msgstr "Обновить"
 
+#: src/views/card/components/Attachments.tsx:61
+msgid "Update failed"
+msgstr ""
+
 #: src/components/LabelForm.tsx:238
 msgid "Update label"
 msgstr "Обновить метку"
@@ -2271,6 +2368,15 @@ msgstr "Обновить до Pro"
 msgid "Upgrade to Pro ($29/month)"
 msgstr "Обновить до Pro ($29/месяц)"
 
+#: src/views/card/components/Attachments.tsx:33
+#: src/views/card/components/Attachments.tsx:103
+msgid "Upload failed"
+msgstr ""
+
+#: src/views/card/components/Attachments.tsx:125
+msgid "Uploading..."
+msgstr ""
+
 #: src/views/boards/components/TemplateBoards.tsx:38
 #: src/views/boards/components/TemplateBoards.tsx:55
 msgid "Urgent"
@@ -2295,6 +2401,10 @@ msgstr "URL должен содержать не менее 3 символов"
 msgid "Use template"
 msgstr "Использовать шаблон"
 
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:141
+msgid "Use this template"
+msgstr ""
+
 #: src/views/members/index.tsx:237
 msgid "User"
 msgstr "Пользователь"
@@ -2302,6 +2412,14 @@ msgstr "Пользователь"
 #: src/views/members/components/InviteMemberForm.tsx:98
 msgid "User is already a member of this workspace"
 msgstr "Пользователь уже является участником этого рабочего пространства"
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:66
+msgid "Valid JSON"
+msgstr ""
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:196
+msgid "Validate JSON"
+msgstr ""
 
 #: src/views/boards/components/TemplateBoards.tsx:38
 msgid "Video"
@@ -2369,7 +2487,7 @@ msgid "Why make an open source Trello?"
 msgstr "Зачем создавать Trello с открытым исходным кодом?"
 
 #: src/components/SettingsLayout.tsx:39
-#: src/views/board/index.tsx:361
+#: src/views/board/index.tsx:369
 #: src/views/boards/index.tsx:22
 #: src/views/members/index.tsx:173
 #: src/views/public/board/index.tsx:100
@@ -2470,11 +2588,11 @@ msgstr "Вы можете пригласить участников команд
 msgid "You can self-host by following the instructions in our <0>repo</0>."
 msgstr "Вы можете развернуть собственный хостинг, следуя инструкциям в нашем <0>репозитории</0>."
 
-#: src/components/AuthForm.tsx:233
+#: src/components/AuthForm.tsx:234
 msgid "You have been logged in successfully."
 msgstr "Вы успешно вошли в систему."
 
-#: src/components/AuthForm.tsx:216
+#: src/components/AuthForm.tsx:217
 msgid "You have been signed up successfully."
 msgstr "Вы успешно зарегистрировались."
 
@@ -2501,6 +2619,10 @@ msgstr "Ваши доски были импортированы."
 #: src/views/settings/components/UpdateDisplayNameForm.tsx:42
 msgid "Your display name has been updated."
 msgstr "Ваше отображаемое имя было обновлено."
+
+#: src/views/board/components/ImportCardsFromJsonModal.tsx:67
+msgid "Your JSON is valid and ready to import"
+msgstr ""
 
 #: src/views/settings/components/ChangePasswordConfirmation.tsx:70
 msgid "Your password has been changed."

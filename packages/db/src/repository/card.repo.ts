@@ -396,6 +396,7 @@ export const getWithListAndMembersByPublicId = async (
       publicId: true,
       title: true,
       description: true,
+      coverAttachmentId: true,
     },
     with: {
       labels: {
@@ -920,4 +921,22 @@ export const getWorkspaceAndCardIdByCardPublicId = async (
         workspaceVisibility: result.list.board.visibility,
       }
     : null;
+};
+
+export const setCoverImage = async (
+  db: dbClient,
+  args: {
+    cardId: number;
+    attachmentId: number | null;
+  },
+) => {
+  const [result] = await db
+    .update(cards)
+    .set({
+      coverAttachmentId: args.attachmentId,
+    })
+    .where(eq(cards.id, args.cardId))
+    .returning();
+
+  return result;
 };
