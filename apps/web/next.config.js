@@ -32,13 +32,6 @@ const config = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname:
-          env("S3_FORCE_PATH_STYLE") === "true"
-            ? `${env("NEXT_PUBLIC_STORAGE_DOMAIN")}`
-            : `*.${env("NEXT_PUBLIC_STORAGE_DOMAIN")}`,
-      },
-      {
         protocol: "http",
         hostname: "localhost",
       },
@@ -79,6 +72,17 @@ if (
   config.images?.remotePatterns?.push({
     protocol: "https",
     hostname: "**",
+  });
+}
+
+const storageDomain = env("NEXT_PUBLIC_STORAGE_DOMAIN");
+if (storageDomain) {
+  config.images?.remotePatterns?.push({
+    protocol: "https",
+    hostname:
+      env("S3_FORCE_PATH_STYLE") === "true"
+        ? `${storageDomain}`
+        : `*.${storageDomain}`,
   });
 }
 
